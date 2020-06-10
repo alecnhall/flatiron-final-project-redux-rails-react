@@ -6,19 +6,19 @@ const rootReducer = combineReducers({
 
 export default rootReducer;
 
-function artistReducer(state = { artist: [], loading: false }, action){
+function artistReducer(state = { artists: [], loading: false }, action){
   switch(action.type) {
     case "SEARCHING_FOR_ARTIST":
       return {
         ...state,
-        artist: [...state.artist],
+        artists: [...state.artists],
         loading: true
       }
 
-    case "ADD_ARTIST":
+    case "ADD_ARTISTS":
       return {
         ...state,
-        artist: action.artist,
+        artists: action.artists,
         loading: false
       }
 

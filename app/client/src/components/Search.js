@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { fetchArtist } from "../actions/index";
+import { connect } from 'react-redux'
+import { fetchArtists } from "../actions/index";
 
 class Search extends Component {
   constructor() {
@@ -11,10 +11,12 @@ class Search extends Component {
     };
   }
 
+  
+
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state.name);
-    // this.props.fetchArtist(this.state.name);
+    
+    this.props.fetchArtists(this.state.name);
     this.setState({
       name: "",
     });
@@ -27,6 +29,7 @@ class Search extends Component {
   };
 
   render() {
+    // console.log(dispatch)
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
@@ -45,10 +48,8 @@ class Search extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    fetchArtist: () => dispatch(fetchArtist()),
-  };
-};
+function  mapDispatchToProps(dispatch) {
+    return { fetchArtists: (name) => dispatch(fetchArtists(name)) }
+  }
 
-export default connect(mapDispatchToProps)(Search);
+export default connect(null ,mapDispatchToProps)(Search);
