@@ -15,7 +15,6 @@ class Search extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    
     this.props.fetchArtists(this.state.name);
     this.setState({
       name: "",

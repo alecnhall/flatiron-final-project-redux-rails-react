@@ -3,6 +3,7 @@ import axios from "axios";
 import Registration from "./auth/Registration";
 import Login from "./auth/Login";
 import Search from "./Search"
+import Artist from "./Artist"
 
 class Home extends Component {
   constructor(props) {
@@ -36,6 +37,7 @@ class Home extends Component {
         <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />
         <button onClick={() => this.handleLogoutClick()}>Logout</button>
         <Search />
+        <Artist />
       </div>
     );
   }
