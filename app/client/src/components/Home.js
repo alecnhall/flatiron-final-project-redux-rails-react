@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import Registration from "./auth/Registration";
 import Login from "./auth/Login";
-import Search from "./Search"
-import Artist from "./Artist"
+import Search from "./Search";
+import Artist from "./Artist";
+import { Button } from "react-bootstrap";
 
 class Home extends Component {
   constructor(props) {
@@ -35,7 +36,13 @@ class Home extends Component {
         <h1>Status: {this.props.loggedInStatus}</h1>
         <Registration handleSuccessfulAuth={this.handleSuccessfulAuth} />
         <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />
-        <button onClick={() => this.handleLogoutClick()}>Logout</button>
+        <Button
+          onClick={() => this.handleLogoutClick()}
+          variant="outline-secondary"
+          className="logout-button"
+        >
+          Logout
+        </Button>
         <Search />
         <Artist />
       </div>
