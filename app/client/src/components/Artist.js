@@ -1,27 +1,32 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import React, { Component } from "react";
+import { Card, Button } from "react-bootstrap";
 
 class Artist extends Component {
-    render() {
-        const artists = this.props.artists.artists
-         console.log(artists)
-        return (
-            <div>
-                <ul>
-                    {artists.map(artist => {
-                        return <li key={artist.id}>{artist.name}</li>
-                    })}
-                </ul>
-            </div>
-        );
-    }
+  constructor(props) {
+    super(props);
+  }
+
+  handleClick() {
+    console.log(event.target);
+  }
+
+  render() {
+    return (
+      <Card style={{ width: "18rem" }} key={this.props.artist.key}>
+        <Card.Img variant="top" src={this.props.artist.picture_medium} />
+        <Card.Body>
+          <Card.Title>{this.props.artist.name}</Card.Title>
+          <Button
+            variant="primary"
+            onClick={this.handleClick}
+            id={this.props.artist.id}
+          >
+            See more...
+          </Button>
+        </Card.Body>
+      </Card>
+    );
+  }
 }
 
-const mapStateToProps = state => {
-    return {
-        artists: state.artists,
-        loading: state.loading
-    }
-}
-
-export default connect(mapStateToProps) (Artist);
+export default Artist;

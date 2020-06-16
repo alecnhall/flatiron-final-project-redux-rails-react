@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Button, Form } from "react-bootstrap";
+import { connect } from "react-redux";
+import { fetchUser } from "../../actions";
 
 class Login extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      username: "",
       email: "",
       password: "",
       registration_errors: "",
@@ -15,25 +16,26 @@ class Login extends Component {
   }
 
   handleSubmit = (event) => {
-    axios
-      .post(
-        "http://localhost:3001/sessions",
-        {
-          user: {
-            email: this.state.email,
-            password: this.state.password,
-          },
-        },
-        { withCredentials: true }
-      )
-      .then((response) => {
-        if (response.data.logged_in) {
-          this.props.handleSuccessfulAuth(response.data);
-        }
-      })
-      .catch((error) => {
-        console.log("registration error", error);
-      });
+    // this.props.fetchUser();
+    // axios
+    //   .post(
+    //     "http://localhost:3001/sessions",
+    //     {
+    //       user: {
+    //         email: this.state.email,
+    //         password: this.state.password,
+    //       },
+    //     },
+    //     { withCredentials: true }
+    //   )
+    //   .then((response) => {
+    //     if (response.data.logged_in) {
+    //       this.props.handleSuccessfulAuth(response.data);
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.log("registration error", error);
+    //   });
     event.preventDefault();
   };
 
@@ -46,9 +48,10 @@ class Login extends Component {
   render() {
     return (
       <div>
+        <h3>Login</h3>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
-            <Form.Label>Email</Form.Label>
+            <Form.Label htmlFor="email">Email</Form.Label>
             <Form.Control
               type="email"
               name="email"
@@ -59,7 +62,7 @@ class Login extends Component {
             />
           </Form.Group>
           <Form.Group>
-            <Form.Label>Password</Form.Label>
+            <Form.Label htmlFor="password">Password</Form.Label>
             <Form.Control
               type="password"
               name="password"
@@ -78,4 +81,8 @@ class Login extends Component {
   }
 }
 
-export default Login;
+function mapDispatchToProps(dispatch) {
+  return { fetchUsers: () => dispatch(fetchUser) };
+}
+
+export default connect(null, mapDispatchToProps)(Login);

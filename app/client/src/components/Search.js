@@ -27,7 +27,6 @@ class Search extends Component {
   };
 
   render() {
-    // console.log(dispatch)
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>

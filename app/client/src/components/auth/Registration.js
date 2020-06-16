@@ -48,7 +48,8 @@ class Registration extends Component {
 
   render() {
     return (
-      <div>
+      <div className="registration-box">
+        <h2>Register Here</h2>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
             <Form.Label>Username</Form.Label>
@@ -98,39 +99,6 @@ class Registration extends Component {
             Sign Up
           </Button>
         </Form>
-        {/* <form onSubmit={this.handleSubmit}>
-          <input
-            type="text"
-            name="username"
-            placeholder="Username"
-            value={this.state.username}
-            onChange={this.handleChange}
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            value={this.state.email}
-            onChange={this.handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleChange}
-            required
-          />
-          <input
-            type="password"
-            name="password_confirmation"
-            placeholder="Password Confirmation"
-            value={this.state.password_confirmation}
-            onChange={this.handleChange}
-            required
-          /> */}
       </div>
     );
   }
