@@ -38,10 +38,10 @@ class Home extends Component {
             <Button onClick={this.handleButtonClick}>Register</Button>
           </Jumbotron>
           <h1>{this.props.loggedInStatus}</h1>
-          <Login
+          {/* <Login
             handleSuccessfulAuth={this.handleSuccessfulAuth}
             loggedInStatus={this.props.loggedInStatus}
-          />
+          /> */}
           <Search />
           <Artists />
         </Container>

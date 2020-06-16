@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
+import Login from "./components/auth/Login";
 import Profile from "./components/Profile";
 import ArtistById from "./components/ArtistById";
 import "./App.css";
@@ -101,10 +102,20 @@ export default class App extends Component {
             )}
           />
           <Route
-            exact
             path={"/signup"}
             render={(props) => (
               <Signup
+                {...props}
+                loggedInStatus={this.state.loggedInStatus}
+                handleLogout={this.handleLogout}
+                handleSuccessfulAuth={this.handleSuccessfulAuth}
+              />
+            )}
+          />
+          <Route
+            path={"/login"}
+            render={(props) => (
+              <Login
                 {...props}
                 loggedInStatus={this.state.loggedInStatus}
                 handleLogout={this.handleLogout}
