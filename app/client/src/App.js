@@ -31,14 +31,15 @@ export default class App extends Component {
     };
 
     fetch(url, options)
+      .then((response) => response.json())
       .then((response) => {
         if (
-          response.data.logged_in &&
+          response.logged_in &&
           this.state.loggedInStatus === "NOT_LOGGED_IN"
         ) {
           this.setState({
             loggedInStatus: "LOGGED_IN",
-            user: response.data.user,
+            user: response.user,
           });
         } else if (
           !response.data.logged_in &&
