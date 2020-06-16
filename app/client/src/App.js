@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import axios from "axios";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Profile from "./components/Profile";
 import ArtistById from "./components/ArtistById";
-import { Container } from "react-bootstrap";
 import "./App.css";
 
 export default class App extends Component {

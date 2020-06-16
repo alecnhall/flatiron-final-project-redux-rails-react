@@ -2,12 +2,16 @@ import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import Search from "./Search";
 import { Link } from "react-router-dom";
-import axios from "axios";
 
 const Navigation = ({ loggedInStatus, handleLogout }) => {
   function handleLogoutClick() {
-    axios
-      .delete("http://localhost:3001/logout", { withCredentials: true })
+    const url = "http://localhost:3001/logout";
+    const options = {
+      method: "DELETE",
+      withCredentials: true,
+    };
+
+    fetch(url, options)
       .then((response) => {
         handleLogout();
       })
