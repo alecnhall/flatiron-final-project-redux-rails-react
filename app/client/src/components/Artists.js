@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Artist from "./artist";
+import ArtistCard from "./ArtistCard";
 
 class Artists extends Component {
   render() {
@@ -9,7 +9,7 @@ class Artists extends Component {
     return (
       <div className="artist-display">
         {artists.map((artist) => {
-          return <Artist key={artist.id} artist={artist} />;
+          return <ArtistCard key={artist.id} artist={artist} />;
         })}
       </div>
     );

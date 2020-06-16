@@ -17,25 +17,25 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     // this.props.fetchUser();
-    // axios
-    //   .post(
-    //     "http://localhost:3001/sessions",
-    //     {
-    //       user: {
-    //         email: this.state.email,
-    //         password: this.state.password,
-    //       },
-    //     },
-    //     { withCredentials: true }
-    //   )
-    //   .then((response) => {
-    //     if (response.data.logged_in) {
-    //       this.props.handleSuccessfulAuth(response.data);
-    //     }
-    //   })
-    //   .catch((error) => {
-    //     console.log("registration error", error);
-    //   });
+    axios
+      .post(
+        "http://localhost:3001/sessions",
+        {
+          user: {
+            email: this.state.email,
+            password: this.state.password,
+          },
+        },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        if (response.data.logged_in) {
+          this.props.handleSuccessfulAuth(response.data);
+        }
+      })
+      .catch((error) => {
+        console.log("registration error", error);
+      });
     event.preventDefault();
   };
 

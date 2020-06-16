@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## USER
 
-Things you may want to cover:
+email
+username
+password
 
-* Ruby version
+### ATTRIBUTES
 
-* System dependencies
+has_many :artists
 
-* Configuration
+## ARTISTS
 
-* Database creation
+name
+img
 
-* Database initialization
+### ATTRIBUTES
 
-* How to run the test suite
+has_many :albums
 
-* Services (job queues, cache servers, search engines, etc.)
+## ALBUMS
 
-* Deployment instructions
-
-* ...
+name
+tracklist

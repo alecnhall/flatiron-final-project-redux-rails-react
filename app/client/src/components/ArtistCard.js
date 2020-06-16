@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import { Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 class Artist extends Component {
   constructor(props) {
     super(props);
-  }
-
-  handleClick() {
-    console.log(event.target);
   }
 
   render() {
@@ -16,11 +13,7 @@ class Artist extends Component {
         <Card.Img variant="top" src={this.props.artist.picture_medium} />
         <Card.Body>
           <Card.Title>{this.props.artist.name}</Card.Title>
-          <Button
-            variant="primary"
-            onClick={this.handleClick}
-            id={this.props.artist.id}
-          >
+          <Button variant="primary" as={Link} to={"/" + this.props.artist.id}>
             See more...
           </Button>
         </Card.Body>

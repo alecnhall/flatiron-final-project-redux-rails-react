@@ -4,6 +4,7 @@ import axios from "axios";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Profile from "./components/Profile";
+import ArtistById from "./components/ArtistById";
 import { Container } from "react-bootstrap";
 import "./App.css";
 
@@ -26,8 +27,12 @@ export default class App extends Component {
   };
 
   checkLoginStatus() {
-    axios
-      .get("http://localhost:3001/logged_in", { withCredentials: true })
+    const url = "http://localhost:3001/logged_in";
+    const options = {
+      credentials: "include",
+    };
+
+    fetch(url, options)
       .then((response) => {
         if (
           response.data.logged_in &&
@@ -107,6 +112,11 @@ export default class App extends Component {
                 handleSuccessfulAuth={this.handleSuccessfulAuth}
               />
             )}
+          />
+          <Route
+            exact
+            path={"/:artistId"}
+            render={(props) => <ArtistById {...props} />}
           />
         </Switch>
       </BrowserRouter>
