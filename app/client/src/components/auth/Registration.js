@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { Redirect } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 class Registration extends Component {
@@ -12,26 +12,36 @@ class Registration extends Component {
       password: "",
       password_confirmation: "",
       registration_errors: "",
+      redirect: false,
     };
   }
 
   handleSubmit = (event) => {
-    axios
-      .post(
-        "http://localhost:3001/registrations",
-        {
-          user: {
-            username: this.state.username,
-            email: this.state.email,
-            password: this.state.password,
-            password_confirmation: this.state.password_confirmation,
-          },
+    const url = "http://localhost:3001/registrations";
+    const options = {
+      method: "POST",
+      withCredentials: true,
+      body: JSON.stringify({
+        user: {
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password,
+          password_confirmation: this.state.password_confirmation,
         },
-        { withCredentials: true }
-      )
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    };
+    fetch(url, options)
+      .then((response) => response.json())
       .then((response) => {
-        if (response.data.status === "created") {
-          this.props.handleSuccessfulAuth(response.data);
+        if (response.status === "created") {
+          this.props.handleSuccessfulAuth(response);
+          this.setState({
+            redirect: true,
+          });
         }
       })
       .catch((error) => {
@@ -47,6 +57,9 @@ class Registration extends Component {
   };
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/profile" />;
+    }
     return (
       <div className="registration-box">
         <h2>Register Here</h2>
