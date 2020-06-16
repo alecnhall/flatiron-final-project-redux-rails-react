@@ -85,6 +85,7 @@ export default class App extends Component {
                 {...props}
                 handleLogin={this.handleLogin}
                 handleLogout={this.handleLogout}
+                loggedInStatus={this.state.loggedInStatus}
               />
             )}
           />

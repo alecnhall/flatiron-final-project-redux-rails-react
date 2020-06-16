@@ -5,7 +5,6 @@ import ArtistCard from "./ArtistCard";
 class Artists extends Component {
   render() {
     const artists = this.props.artists.artists;
-    console.log(artists);
     return (
       <div className="artist-display">
         {artists.map((artist) => {

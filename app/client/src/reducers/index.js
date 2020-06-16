@@ -65,6 +65,20 @@ function userReducer(state = { user: [], loading: false }, action) {
         loading: false,
       };
 
+    case "LOGGING_USER_OUT":
+      return {
+        ...state,
+        user: action.user,
+        loading: true,
+      };
+
+    case "USER_LOGGED_OUT":
+      return {
+        ...state,
+        user: action.user,
+        loading: true,
+      };
+
     default:
       return state;
   }

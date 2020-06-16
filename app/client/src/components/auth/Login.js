@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { fetchUser } from "../../actions";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   constructor(props) {
@@ -16,33 +16,8 @@ class Login extends Component {
   }
 
   handleSubmit = (event) => {
-    // this.props.fetchUser();
     event.preventDefault();
-    const url = "http://localhost:3001/sessions";
-    const options = {
-      method: "POST",
-      withCredentials: true,
-      body: JSON.stringify({
-        user: {
-          email: this.state.email,
-          password: this.state.password,
-        },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    };
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.logged_in) {
-          this.props.handleSuccessfulAuth(response);
-        }
-      })
-      .catch((error) => {
-        console.log("registration error", error);
-      });
+    this.props.fetchUser();
   };
 
   handleChange = (event) => {
@@ -52,6 +27,10 @@ class Login extends Component {
   };
 
   render() {
+    console.log(this.props);
+    if (this.props.loggedInStatus === "LOGGED_IN") {
+      return <Redirect to="/profile" />;
+    }
     return (
       <div>
         <h3>Login</h3>
@@ -86,9 +65,13 @@ class Login extends Component {
     );
   }
 }
-
+// const mapStateProps = (state) => {
+//   return {
+//     loggedInStatus:
+//   }
+// }
 function mapDispatchToProps(dispatch) {
-  return { fetchUsers: () => dispatch(fetchUser) };
+  return { fetchUser: () => dispatch(fetchUser) };
 }
 
 export default connect(null, mapDispatchToProps)(Login);

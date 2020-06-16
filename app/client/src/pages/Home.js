@@ -22,6 +22,7 @@ class Home extends Component {
   };
 
   render() {
+    console.log(this.props.loggedInStatus);
     return (
       <div>
         <Navigation />
@@ -37,7 +38,10 @@ class Home extends Component {
             <Button onClick={this.handleButtonClick}>Register</Button>
           </Jumbotron>
           <h1>{this.props.loggedInStatus}</h1>
-          <Login handleSuccessfulAuth={this.handleSuccessfulAuth} />
+          <Login
+            handleSuccessfulAuth={this.handleSuccessfulAuth}
+            loggedInStatus={this.props.loggedInStatus}
+          />
           <Search />
           <Artists />
         </Container>

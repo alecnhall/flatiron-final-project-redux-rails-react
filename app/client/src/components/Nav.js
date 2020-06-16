@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import Search from "./Search";
+import { Connect, connect } from "react-redux";
+import { handleLogout } from "../actions/index";
 import { Link } from "react-router-dom";
 
 const Navigation = ({ loggedInStatus, handleLogout }) => {
@@ -58,4 +59,8 @@ const Navigation = ({ loggedInStatus, handleLogout }) => {
   );
 };
 
-export default Navigation;
+function mapDispatchToProps(dispatch) {
+  return { handleLogout: () => dispatch(handleLogout) };
+}
+
+export default connect(null, mapDispatchToProps)(Navigation);
