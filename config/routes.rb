@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'artist/index'
   get 'artist/create'
   get 'artist/show'
+  resources :artists, only: [:index, :show, :create]
+  resources :albums, only: [:index, :show, :create]
   resources :sessions, only: [:create]
   resources :registrations, only: [:create]
   delete :logout, to: "sessions#logout"

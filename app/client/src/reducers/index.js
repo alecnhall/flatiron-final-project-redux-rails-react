@@ -43,11 +43,11 @@ function artistReducer(state = { artists: [], loading: false }, action) {
 }
 
 function userReducer(
-  state = { user: {}, loading: false, logged_in: "NOT_LOGGED_IN" },
+  state = { user: [], loading: false, loggedIn: false },
   action
 ) {
   switch (action.type) {
-    case "LOAD_USER":
+    case "FETCHING_USER":
       return {
         ...state,
         user: [...state.user],
@@ -61,11 +61,11 @@ function userReducer(
         loading: true,
       };
 
-    case "ADD_USER":
+    case "USER_LOGGED_IN":
       return {
         ...state,
         user: action.user,
-        logged_in: "LOGGED_IN",
+        loggedIn: true,
         loading: false,
       };
 
@@ -80,7 +80,14 @@ function userReducer(
       return {
         ...state,
         user: action.user,
-        logged_in: "LOGGED_OUT",
+        loggedIn: true,
+        loading: false,
+      };
+
+    case "CHECKING_USER_LOGIN":
+      return {
+        ...state,
+        user: [...state.user],
         loading: true,
       };
 

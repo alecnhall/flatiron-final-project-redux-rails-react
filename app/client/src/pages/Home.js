@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 import { Jumbotron, Button, Container } from "react-bootstrap";
 
-import Login from "../components/auth/Login";
 import Search from "../components/Search";
 import Artists from "../components/Artists";
 import Navigation from "../components/Nav";
@@ -12,17 +11,16 @@ class Home extends Component {
     super(props);
   }
 
-  handleSuccessfulAuth = (data) => {
-    this.props.handleLogin(data);
-    this.props.history.push("/profile");
+  handleRegisterClick = () => {
+    console.log("click");
+    this.props.history.push("/signup");
   };
 
-  handleButtonClick = () => {
-    this.props.history.push("/Signup");
+  handleLoginClick = () => {
+    this.props.history.push("/login");
   };
 
   render() {
-    console.log(this.props.loggedInStatus);
     return (
       <div>
         <Navigation />
@@ -35,9 +33,12 @@ class Home extends Component {
               be able to visit that artist and look at alll the things that make
               you love them
             </p>
-            <Button onClick={this.handleButtonClick}>Register</Button>
+            <Button onClick={this.handleRegisterClick}>Register</Button>
+            <div className="login-button">
+              <Button onClick={this.handleLoginClick}>Login</Button>
+            </div>
           </Jumbotron>
-          <h1>{this.props.loggedInStatus}</h1>
+          <h1>{this.props.loggedIn}</h1>
           {/* <Login
             handleSuccessfulAuth={this.handleSuccessfulAuth}
             loggedInStatus={this.props.loggedInStatus}

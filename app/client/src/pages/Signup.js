@@ -8,7 +8,7 @@ const Signup = (props) => {
     <div>
       <Navigation />
       <Container>
-        <Registration handleSuccessfulAuth={props.handleSuccessfulAuth} />
+        <Registration />
       </Container>
     </div>
   );

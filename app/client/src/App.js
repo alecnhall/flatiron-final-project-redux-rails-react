@@ -2,60 +2,25 @@ import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
-import Login from "./components/auth/Login";
+import Login from "./pages/Login";
 import Profile from "./components/Profile";
 import ArtistById from "./components/ArtistById";
 import "./App.css";
+import { connect } from "react-redux";
+// import { checkLogin } from "./actions";
 
-export default class App extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      loggedInStatus: "NOT_LOGGED_IN",
-      user: {},
-    };
+class App extends Component {
+  constructor(props) {
+    super(props);
   }
 
-  handleSuccessfulAuth = (data) => {
-    this.handleLogin(data);
-  };
-
-  checkLoginStatus() {
-    const url = "http://localhost:3001/logged_in";
-    const options = {
-      credentials: "include",
-    };
-
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((response) => {
-        if (
-          response.logged_in &&
-          this.state.loggedInStatus === "NOT_LOGGED_IN"
-        ) {
-          this.setState({
-            loggedInStatus: "LOGGED_IN",
-            user: response.user,
-          });
-        } else if (
-          !response.data.logged_in &&
-          this.state.loggedInStatus === "LOGGED_IN"
-        ) {
-          this.setState({
-            loggedInStatus: "NOT_LOGGED_IN",
-            user: {},
-          });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
-  componentDidMount() {
-    this.checkLoginStatus();
-  }
+  // componentDidMount() {
+  //   // console.log(this.state.user);
+  //   const options = {
+  //     credentials: "include",
+  //   };
+  //   this.props.checkLogin(options);
+  // }
 
   // handleLogout() {
   //   this.setState({
@@ -64,12 +29,12 @@ export default class App extends Component {
   //   });
   // }
 
-  handleLogin(data) {
-    this.setState({
-      loggedInStatus: "LOGGED_IN",
-      user: data.user,
-    });
-  }
+  // handleLogin(data) {
+  //   this.setState({
+  //     loggedInStatus: "LOGGED_IN",
+  //     user: data.user,
+  //   });
+  // }
 
   render() {
     return (
@@ -79,12 +44,7 @@ export default class App extends Component {
             exact
             path={"/"}
             render={(props) => (
-              <Home
-                {...props}
-                handleLogin={this.handleLogin}
-                handleLogout={this.handleLogout}
-                loggedInStatus={this.state.loggedInStatus}
-              />
+              <Home {...props} loggedInStatus={this.props.loggedIn} />
             )}
           />
           <Route
@@ -103,26 +63,15 @@ export default class App extends Component {
             render={(props) => (
               <Signup
                 {...props}
-                loggedInStatus={this.state.loggedInStatus}
                 handleLogout={this.handleLogout}
                 handleSuccessfulAuth={this.handleSuccessfulAuth}
               />
             )}
           />
-          <Route
-            path={"/login"}
-            render={(props) => (
-              <Login
-                {...props}
-                loggedInStatus={this.state.loggedInStatus}
-                handleLogout={this.handleLogout}
-                handleSuccessfulAuth={this.handleSuccessfulAuth}
-              />
-            )}
-          />
+          <Route path={"/login"} render={(props) => <Login {...props} />} />
           <Route
             exact
-            path={"/:artistId"}
+            path={"/artist/:artistId"}
             render={(props) => <ArtistById {...props} />}
           />
         </Switch>
@@ -130,3 +79,9 @@ export default class App extends Component {
     );
   }
 }
+
+function mapDispatchToProps(dispatch) {
+  return { checkLogin: (options) => dispatch(checkLogin(options)) };
+}
+
+export default connect(null, mapDispatchToProps)(App);

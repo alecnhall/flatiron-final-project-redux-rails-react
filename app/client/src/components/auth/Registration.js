@@ -14,13 +14,28 @@ class Registration extends Component {
       password: "",
       password_confirmation: "",
       registration_errors: "",
-      redirect: false,
     };
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.registerUser();
+    const options = {
+      method: "POST",
+      withCredentials: true,
+      body: JSON.stringify({
+        user: {
+          username: this.state.username,
+          email: this.state.email,
+          password: this.state.password,
+          password_confirmation: this.state.password_confirmation,
+        },
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    };
+    this.props.registerUser(options);
   };
 
   handleChange = (event) => {
@@ -30,9 +45,6 @@ class Registration extends Component {
   };
 
   render() {
-    if (this.state.redirect) {
-      return <Redirect to="/profile" />;
-    }
     return (
       <div className="registration-box">
         <h2>Register Here</h2>
@@ -91,6 +103,6 @@ class Registration extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-  return { registerUser: () => dispatch(registerUser()) };
+  return { registerUser: (options) => dispatch(registerUser(options)) };
 }
 export default connect(null, mapDispatchToProps)(Registration);

@@ -13,7 +13,11 @@ class Artist extends Component {
         <Card.Img variant="top" src={this.props.artist.picture_medium} />
         <Card.Body>
           <Card.Title>{this.props.artist.name}</Card.Title>
-          <Button variant="primary" as={Link} to={"/" + this.props.artist.id}>
+          <Button
+            variant="primary"
+            as={Link}
+            to={"/artist/" + this.props.artist.id}
+          >
             See more...
           </Button>
         </Card.Body>

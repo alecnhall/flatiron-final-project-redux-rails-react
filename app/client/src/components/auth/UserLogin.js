@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { fetchUser } from "../../actions";
 import { Redirect } from "react-router-dom";
 
-class Login extends Component {
+class UserLogin extends Component {
   constructor(props) {
     super(props);
 
@@ -17,7 +17,22 @@ class Login extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    this.props.fetchUser();
+    const options = {
+      method: "POST",
+      withCredentials: true,
+      body: JSON.stringify({
+        user: {
+          email: this.state.email,
+          password: this.state.password,
+        },
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    };
+    this.props.fetchUser(options);
+    console.log(this.props.history);
   };
 
   handleChange = (event) => {
@@ -27,11 +42,8 @@ class Login extends Component {
   };
 
   render() {
-    // if (this.props.loggedInStatus === "LOGGED_IN") {
-    //   return <Redirect to="/profile" />;
-    // }
     return (
-      <div>
+      <div className="registration-box">
         <h3>Login</h3>
         <Form onSubmit={this.handleSubmit}>
           <Form.Group>
@@ -68,12 +80,12 @@ class Login extends Component {
 const mapStateProps = (state) => {
   return {
     user: state.user,
-    loggedInStatus: state.loggedInStatus,
+    loggedIn: state.loggedIn,
   };
 };
 
 function mapDispatchToProps(dispatch) {
-  return { fetchUser: () => dispatch(fetchUser()) };
+  return { fetchUser: (options) => dispatch(fetchUser(options)) };
 }
 
-export default connect(mapStateProps, mapDispatchToProps)(Login);
+export default connect(mapStateProps, mapDispatchToProps)(UserLogin);

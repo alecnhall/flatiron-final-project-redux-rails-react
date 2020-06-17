@@ -1,6 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchArtist } from "../actions";
 
 class ArtistById extends Component {
+  constructor(props) {
+    super(props);
+  }
+
+  // componentDidMount() {
+  //   console.log(state);
+  //   this.fetchArtist(id);
+  // }
+
   render() {
     return (
       <div>
@@ -10,4 +21,8 @@ class ArtistById extends Component {
   }
 }
 
-export default ArtistById;
+function mapDispatchToProps(dispatch) {
+  return { fetchArtist: (id) => dispatch(fetchArtist(id)) };
+}
+
+export default connect(null, mapDispatchToProps)(ArtistById);

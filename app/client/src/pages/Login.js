@@ -1,19 +1,17 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Login from "../components/auth/Login";
+import UserLogin from "../components/auth/UserLogin";
 import Navigation from "../components/Nav";
 
 const Login = (props) => {
-  render() {
-    return (
-      <div>
-        <Navigation />
-        <Container>
-          <Login handleSuccessfulAuth={props.handleSuccessfulAuth}/>
-        </Container>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <Navigation />
+      <Container>
+        <UserLogin />
+      </Container>
+    </div>
+  );
+};
 
 export default Login;

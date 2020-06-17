@@ -1,29 +1,29 @@
-export const checkLogIn = () => {
-  return (dispatch) => () => {
-    dispatch({ type: "CHECKING_LOGGED_IN" });
+export const checkLogin = (options) => {
+  return (dispatch) => {
+    dispatch({ type: "CHECKING_USER_LOG_IN" });
+    const url = "http://localhost:3001/logged_in";
+    fetch(url, options)
+      .then((response) => response.json())
+      .then((response) => {
+        console.log(response);
+        if (response.logged_in) {
+          console.log("hit");
+          return dispatch({ type: "USER_LOGGED_IN" });
+        } else if (!response.logged_in) {
+          console.log("hit");
+          return dispatch({ type: "USER_LOGGED_OUT" });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 };
 
-export const registerUser = () => {
+export const registerUser = (options) => {
   return (dispatch) => {
     dispatch({ type: "REGISTERING_USER" });
     const url = "http://localhost:3001/registrations";
-    const options = {
-      method: "POST",
-      withCredentials: true,
-      body: JSON.stringify({
-        user: {
-          username: this.state.username,
-          email: this.state.email,
-          password: this.state.password,
-          password_confirmation: this.state.password_confirmation,
-        },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    };
     fetch(url, options)
       .then((response) => response.json())
       .then((response) => {
@@ -38,27 +38,14 @@ export const registerUser = () => {
   };
 };
 
-export const fetchUser = () => {
+export const fetchUser = (options) => {
   return (dispatch) => {
     dispatch({ type: "FETCHING_USER" });
     const url = "http://localhost:3001/sessions";
-    const options = {
-      method: "POST",
-      withCredentials: true,
-      body: JSON.stringify({
-        user: {
-          email: this.state.email,
-          password: this.state.password,
-        },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    };
     fetch(url, options)
       .then((response) => response.json())
       .then((response) => {
+        console.log(response);
         if (response.logged_in) {
           const user = response.user;
           return dispatch({ type: "ADD_USER", user });
