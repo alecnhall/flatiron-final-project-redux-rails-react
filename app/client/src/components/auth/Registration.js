@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
+import { connect } from "react-redux";
+import { registerUser } from "../../actions";
 
 class Registration extends Component {
   constructor(props) {
@@ -17,37 +19,8 @@ class Registration extends Component {
   }
 
   handleSubmit = (event) => {
-    const url = "http://localhost:3001/registrations";
-    const options = {
-      method: "POST",
-      withCredentials: true,
-      body: JSON.stringify({
-        user: {
-          username: this.state.username,
-          email: this.state.email,
-          password: this.state.password,
-          password_confirmation: this.state.password_confirmation,
-        },
-      }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    };
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.status === "created") {
-          this.props.handleSuccessfulAuth(response);
-          this.setState({
-            redirect: true,
-          });
-        }
-      })
-      .catch((error) => {
-        console.log("registration error", error);
-      });
     event.preventDefault();
+    this.props.registerUser();
   };
 
   handleChange = (event) => {
@@ -117,4 +90,7 @@ class Registration extends Component {
   }
 }
 
-export default Registration;
+function mapDispatchToProps(dispatch) {
+  return { registerUser: () => dispatch(registerUser()) };
+}
+export default connect(null, mapDispatchToProps)(Registration);

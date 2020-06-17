@@ -27,10 +27,9 @@ class Login extends Component {
   };
 
   render() {
-    console.log(this.props);
-    if (this.props.loggedInStatus === "LOGGED_IN") {
-      return <Redirect to="/profile" />;
-    }
+    // if (this.props.loggedInStatus === "LOGGED_IN") {
+    //   return <Redirect to="/profile" />;
+    // }
     return (
       <div>
         <h3>Login</h3>
@@ -65,13 +64,16 @@ class Login extends Component {
     );
   }
 }
-// const mapStateProps = (state) => {
-//   return {
-//     loggedInStatus:
-//   }
-// }
+
+const mapStateProps = (state) => {
+  return {
+    user: state.user,
+    loggedInStatus: state.loggedInStatus,
+  };
+};
+
 function mapDispatchToProps(dispatch) {
-  return { fetchUser: () => dispatch(fetchUser) };
+  return { fetchUser: () => dispatch(fetchUser()) };
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateProps, mapDispatchToProps)(Login);

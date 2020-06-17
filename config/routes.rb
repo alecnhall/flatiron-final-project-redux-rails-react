@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'albums/index'
+  get 'albums/create'
+  get 'albums/show'
+  get 'artist/index'
+  get 'artist/create'
+  get 'artist/show'
   resources :sessions, only: [:create]
   resources :registrations, only: [:create]
   delete :logout, to: "sessions#logout"

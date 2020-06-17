@@ -1,11 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
+import { Container } from "react-bootstrap";
 import Login from "../components/auth/Login";
+import Navigation from "../components/Nav";
 
-class Login extends Component {
+const Login = (props) => {
   render() {
     return (
       <div>
-        <Login />
+        <Navigation />
+        <Container>
+          <Login handleSuccessfulAuth={props.handleSuccessfulAuth}/>
+        </Container>
       </div>
     );
   }
