@@ -1,4 +1,4 @@
-export const checkLogin = (options) => {
+export const checkLogin = (options, user) => {
   return (dispatch) => {
     dispatch({ type: "CHECKING_USER_LOG_IN" });
     const url = "http://localhost:3001/logged_in";
@@ -8,10 +8,10 @@ export const checkLogin = (options) => {
         console.log(response);
         if (response.logged_in) {
           console.log("hit");
-          return dispatch({ type: "USER_LOGGED_IN" });
+          return dispatch({ type: "USER_LOGGED_IN", user });
         } else if (!response.logged_in) {
           console.log("hit");
-          return dispatch({ type: "USER_LOGGED_OUT" });
+          return dispatch({ type: "USER_LOGGED_OUT", user });
         }
       })
       .catch((error) => {

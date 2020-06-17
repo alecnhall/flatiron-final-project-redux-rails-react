@@ -7,7 +7,7 @@ import Profile from "./components/Profile";
 import ArtistById from "./components/ArtistById";
 import "./App.css";
 import { connect } from "react-redux";
-// import { checkLogin } from "./actions";
+import { checkLogin } from "./actions";
 
 class App extends Component {
   constructor(props) {
@@ -80,8 +80,14 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
 function mapDispatchToProps(dispatch) {
-  return { checkLogin: (options) => dispatch(checkLogin(options)) };
+  return { checkLogin: (options, user) => dispatch(checkLogin(options, user)) };
 }
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

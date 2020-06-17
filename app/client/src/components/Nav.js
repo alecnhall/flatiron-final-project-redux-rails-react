@@ -1,6 +1,6 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
-import { Connect, connect } from "react-redux";
+import { connect } from "react-redux";
 import { handleLogout } from "../actions/index";
 import { Link } from "react-router-dom";
 

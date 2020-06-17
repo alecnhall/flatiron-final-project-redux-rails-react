@@ -39,7 +39,6 @@ class Home extends Component {
               <Button onClick={this.handleLoginClick}>Login</Button>
             </div>
           </Jumbotron>
-          <h1>{this.props.loggedIn}</h1>
           <Search />
           <Artists />
         </Container>
