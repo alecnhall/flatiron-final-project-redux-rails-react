@@ -1,13 +1,35 @@
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
-  artists: artistReducer,
+  artists: artistsReducer,
   user: userReducer,
+  artist: artistReducer,
 });
 
 export default rootReducer;
 
-function artistReducer(state = { artists: [], loading: false }, action) {
+function artistReducer(state = { artist: [], loading: false }, action) {
+  switch (action.type) {
+    case "LOADING_ARTIST":
+      return {
+        ...state,
+        artist: [...state.artist],
+        loading: true,
+      };
+
+    case "ADD_ARTIST":
+      return {
+        ...state,
+        artist: action.artist,
+        loading: false,
+      };
+
+    default:
+      return state;
+  }
+}
+
+function artistsReducer(state = { artists: [], loading: false }, action) {
   switch (action.type) {
     case "SEARCHING_FOR_ARTIST":
       return {

@@ -5,6 +5,7 @@ import { Jumbotron, Button, Container } from "react-bootstrap";
 import Search from "../components/Search";
 import Artists from "../components/Artists";
 import Navigation from "../components/Nav";
+import { connect } from "react-redux";
 
 class Home extends Component {
   constructor(props) {
@@ -39,10 +40,6 @@ class Home extends Component {
             </div>
           </Jumbotron>
           <h1>{this.props.loggedIn}</h1>
-          {/* <Login
-            handleSuccessfulAuth={this.handleSuccessfulAuth}
-            loggedInStatus={this.props.loggedInStatus}
-          /> */}
           <Search />
           <Artists />
         </Container>
@@ -50,5 +47,9 @@ class Home extends Component {
     );
   }
 }
-
+// const mapStateToProps = (state) => {
+//   return {
+//     user: user.state,
+//   };
+// };
 export default Home;
