@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { fetchUser } from "../../redux/actions";
-import { Redirect } from "react-router-dom";
 
 class UserLogin extends Component {
   constructor(props) {
@@ -32,7 +31,6 @@ class UserLogin extends Component {
       },
     };
     this.props.fetchUser(options);
-    console.log(this.props.history);
   };
 
   handleChange = (event) => {

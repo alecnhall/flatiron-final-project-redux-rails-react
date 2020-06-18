@@ -23,7 +23,7 @@ const Navigation = (props) => {
           </Nav>
           {props.loggedIn ? (
             <Nav>
-              <Nav.Link as={Link} to="/" onClick={handleLogoutClick}>
+              <Nav.Link as={Link} to="/" onClick={props.handleLogout}>
                 Logout
               </Nav.Link>
             </Nav>
@@ -50,7 +50,7 @@ const mapStateToProps = (state) => {
 };
 
 function mapDispatchToProps(dispatch) {
-  return { handleLogout: () => dispatch(handleLogout) };
+  return { handleLogout: () => dispatch(handleLogout()) };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

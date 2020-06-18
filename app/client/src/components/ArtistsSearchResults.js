@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import ArtistCards from "./ArtistCards";
 
 const Artists = ({ artists }) => {
-  console.log(artists);
   return (
     <div>
       <ArtistCards artists={artists.artists} />

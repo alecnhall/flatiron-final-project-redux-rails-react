@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchArtist, fetchArtistAlbums } from "../redux/actions/index";
+import ArtistDetails from "./ArtistDetails";
+import ArtistAlbums from "./ArtistAlbums";
+import Navigation from "./Nav";
+import { Container } from "react-bootstrap";
 
 class ArtistById extends Component {
   componentDidMount() {
@@ -12,8 +16,11 @@ class ArtistById extends Component {
   render() {
     return (
       <div>
-        <code>{JSON.stringify(this.props.artist)}</code>
-        <code>{JSON.stringify(this.props.albums)}</code>
+        <Navigation />
+        <Container>
+          <ArtistDetails artist={this.props.artist.artist} />
+          <ArtistAlbums albums={this.props.albums} />
+        </Container>
       </div>
     );
   }

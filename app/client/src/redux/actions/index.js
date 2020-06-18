@@ -8,7 +8,7 @@ export const registerUser = (options) => {
         if (response.status === "created") {
           const user = response.user;
           localStorage.setItem("token", data.token);
-          return dispatch({ type: "ADD_USER", user });
+          return dispatch({ type: "USER_LOGGED_IN", user });
         }
       })
       .catch((error) => {
@@ -26,7 +26,7 @@ export const fetchUser = (options) => {
       .then((response) => {
         if (response.logged_in) {
           const user = response.user;
-          return dispatch({ type: "ADD_USER", user });
+          return dispatch({ type: "USER_LOGGED_IN", user });
         }
       })
       .catch((error) => {
@@ -43,10 +43,9 @@ export const handleLogout = () => {
       method: "DELETE",
       withCredentials: true,
     };
-
     fetch(url, options)
       .then((response) => {
-        handleLogout();
+        return dispatch({ type: "USER_LOGGED_OUT" });
       })
       .catch((error) => {
         console.log(error);
