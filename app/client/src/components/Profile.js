@@ -1,17 +1,24 @@
-import React from "react";
+import React, { Component } from "react";
 import Nav from "./Nav";
+import { connect } from "react-redux";
 
-const Profile = (props) => {
-  return (
-    <div>
-      <Nav
-        loggedInStatus={props.loggedInStatus}
-        handleLogout={props.handleLogout}
-      />
-      <h1>Dashboard</h1>
-      <h1>Status: {props.loggedInStatus}</h1>
-    </div>
-  );
+class Profile extends Component {
+  render() {
+    return (
+      <div>
+        <Nav />
+        <h1>Dashboard</h1>
+        <h1>Hello, {this.props.username}!</h1>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    username: state.user.user.username,
+  };
 };
 
-export default Profile;
+export default connect(mapStateToProps)(Profile);

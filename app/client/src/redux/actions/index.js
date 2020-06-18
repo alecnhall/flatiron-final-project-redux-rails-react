@@ -7,7 +7,6 @@ export const registerUser = (options) => {
       .then((response) => {
         if (response.status === "created") {
           const user = response.user;
-          localStorage.setItem("token", data.token);
           return dispatch({ type: "USER_LOGGED_IN", user });
         }
       })

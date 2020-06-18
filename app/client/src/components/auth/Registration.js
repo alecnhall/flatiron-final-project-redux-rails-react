@@ -45,6 +45,9 @@ class Registration extends Component {
   };
 
   render() {
+    if (this.props.loggedIn) {
+      return <Redirect to="/profile" />;
+    }
     return (
       <div className="registration-box">
         <h2>Register Here</h2>
@@ -102,7 +105,13 @@ class Registration extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    loggedIn: state.user.loggedIn,
+  };
+};
+
 function mapDispatchToProps(dispatch) {
   return { registerUser: (options) => dispatch(registerUser(options)) };
 }
-export default connect(null, mapDispatchToProps)(Registration);
+export default connect(mapStateToProps, mapDispatchToProps)(Registration);

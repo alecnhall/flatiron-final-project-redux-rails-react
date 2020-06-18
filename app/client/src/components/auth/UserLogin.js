@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
 import { fetchUser } from "../../redux/actions";
+import { Redirect } from "react-router";
 
 class UserLogin extends Component {
   constructor(props) {
@@ -40,6 +41,9 @@ class UserLogin extends Component {
   };
 
   render() {
+    if (this.props.loggedIn) {
+      return <Redirect to="/profile" />;
+    }
     return (
       <div className="registration-box">
         <h3>Login</h3>
@@ -78,7 +82,7 @@ class UserLogin extends Component {
 const mapStateProps = (state) => {
   return {
     user: state.user,
-    loggedIn: state.loggedIn,
+    loggedIn: state.user.loggedIn,
   };
 };
 
