@@ -3,9 +3,8 @@ import React, { Component } from "react";
 import { Jumbotron, Button, Container } from "react-bootstrap";
 
 import Search from "../components/Search";
-import Artists from "../components/Artists";
+import Artists from "../components/ArtistsSearchResults";
 import Navigation from "../components/Nav";
-import { connect } from "react-redux";
 
 class Home extends Component {
   constructor(props) {
@@ -46,9 +45,5 @@ class Home extends Component {
     );
   }
 }
-// const mapStateToProps = (state) => {
-//   return {
-//     user: user.state,
-//   };
-// };
+
 export default Home;

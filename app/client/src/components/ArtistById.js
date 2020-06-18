@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchArtist } from "../actions";
-import { params } from "react-router-dom";
+import { fetchArtist, fecthArtistAlbums } from "../redux/reducers/index";
 
 class ArtistById extends Component {
   constructor(props) {
@@ -9,29 +8,19 @@ class ArtistById extends Component {
   }
 
   componentDidMount() {
-    // const { match: { params } =  this.props}
-    // console.log(state);
-    // this.fetchArtist(id);
+    const id = this.props.match.params.artistId;
+    this.props.fetchArtist(id);
   }
 
   render() {
-    return (
-      <div>
-        <h1>Artist Info</h1>
-      </div>
-    );
+    return <div>Artist</div>;
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    artist: state.artist,
-    loading: state.loading,
-  };
-};
-
 function mapDispatchToProps(dispatch) {
-  return { fetchArtist: (id) => dispatch(fetchArtist(id)) };
+  return {
+    fetchArtist: (id) => dispatch(fetchArtist(id)),
+    fecthAlbums: (id) => dispatch(fetchArtistAlbums(id)),
+  };
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(ArtistById);
+export default connect(null, mapDispatchToProps)(ArtistById);

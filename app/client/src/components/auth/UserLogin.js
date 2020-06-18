@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
-import { fetchUser } from "../../actions";
+import { fetchUser } from "../../redux/actions";
 import { Redirect } from "react-router-dom";
 
 class UserLogin extends Component {

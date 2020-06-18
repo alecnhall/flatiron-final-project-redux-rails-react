@@ -1,25 +1,3 @@
-export const checkLogin = (options, user) => {
-  return (dispatch) => {
-    dispatch({ type: "CHECKING_USER_LOG_IN" });
-    const url = "http://localhost:3001/logged_in";
-    fetch(url, options)
-      .then((response) => response.json())
-      .then((response) => {
-        console.log(response);
-        if (response.logged_in) {
-          console.log("hit");
-          return dispatch({ type: "USER_LOGGED_IN", user });
-        } else if (!response.logged_in) {
-          console.log("hit");
-          return dispatch({ type: "USER_LOGGED_OUT", user });
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-};
-
 export const registerUser = (options) => {
   return (dispatch) => {
     dispatch({ type: "REGISTERING_USER" });
@@ -29,6 +7,7 @@ export const registerUser = (options) => {
       .then((response) => {
         if (response.status === "created") {
           const user = response.user;
+          localStorage.setItem("token", data.token);
           return dispatch({ type: "ADD_USER", user });
         }
       })
@@ -92,13 +71,27 @@ export const fetchArtists = (name) => {
 
 export const fetchArtist = (id) => {
   return (dispatch) => {
-    dispatch({ type: "SEARCHING_ARTIST" });
+    dispatch({ type: "FETCHING_ARTIST" });
     fetch(
       `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/artist/${id}`
     )
       .then((res) => res.json())
       .then((res) => {
         const artist = res.data;
+        return dispatch({ type: "ADD_ARTIST", artist });
+      });
+  };
+};
+
+export const fetchArtistAlbums = (id) => {
+  return (dispatch) => {
+    dispatch({ type: "FETCHING_ARTIST_ALBUMS" });
+    fetch(
+      `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/artist/${id}/albums`
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        const artistAlbums = res.data;
         return dispatch({ type: "ADD_ARTIST", artist });
       });
   };

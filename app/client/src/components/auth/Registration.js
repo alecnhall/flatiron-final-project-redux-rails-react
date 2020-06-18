@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 import { connect } from "react-redux";
-import { registerUser } from "../../actions";
+import { registerUser } from "../../redux/actions";
 
 class Registration extends Component {
   constructor(props) {

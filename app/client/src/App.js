@@ -7,34 +7,12 @@ import Profile from "./components/Profile";
 import ArtistById from "./components/ArtistById";
 import "./App.css";
 import { connect } from "react-redux";
-import { checkLogin } from "./actions";
+import { checkLogin } from "./redux/actions";
 
 class App extends Component {
   constructor(props) {
     super(props);
   }
-
-  // componentDidMount() {
-  //   // console.log(this.state.user);
-  //   const options = {
-  //     credentials: "include",
-  //   };
-  //   this.props.checkLogin(options);
-  // }
-
-  // handleLogout() {
-  //   this.setState({
-  //     loggedInStatus: "NOT_LOGGED_IN",
-  //     user: {},
-  //   });
-  // }
-
-  // handleLogin(data) {
-  //   this.setState({
-  //     loggedInStatus: "LOGGED_IN",
-  //     user: data.user,
-  //   });
-  // }
 
   render() {
     return (
@@ -50,13 +28,7 @@ class App extends Component {
           <Route
             exact
             path={"/profile"}
-            render={(props) => (
-              <Profile
-                {...props}
-                loggedInStatus={this.state.loggedInStatus}
-                handleLogout={this.handleLogout}
-              />
-            )}
+            render={(props) => <Profile {...props} />}
           />
           <Route
             path={"/signup"}

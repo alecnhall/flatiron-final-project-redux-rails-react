@@ -10,7 +10,7 @@ import thunk from "redux-thunk";
 
 import App from "./App";
 
-import reducers from "./reducers/index";
+import reducers from "./redux/reducers/index";
 
 const store = createStore(
   reducers,

@@ -4,13 +4,35 @@ const rootReducer = combineReducers({
   artists: artistsReducer,
   user: userReducer,
   artist: artistReducer,
+  albums: albumsReducer,
 });
 
 export default rootReducer;
 
+function albumsReducer(state = { albums: [], loading: false }, action) {
+  switch (action.type) {
+    case "FETCHING_ALBUMS":
+      return {
+        ...state,
+        albums: [...state.albums],
+        loading: true,
+      };
+
+    case "ADD_ALBUMS":
+      return {
+        ...state,
+        albums: action.albums,
+        loading: false,
+      };
+
+    default:
+      return state;
+  }
+}
+
 function artistReducer(state = { artist: [], loading: false }, action) {
   switch (action.type) {
-    case "LOADING_ARTIST":
+    case "FETCHING_ARTIST":
       return {
         ...state,
         artist: [...state.artist],
@@ -42,20 +64,6 @@ function artistsReducer(state = { artists: [], loading: false }, action) {
       return {
         ...state,
         artists: action.artists,
-        loading: false,
-      };
-
-    case "LOADING_ARTIST":
-      return {
-        ...state,
-        artist: [...state.artist],
-        loading: true,
-      };
-
-    case "ADD_ARTIST":
-      return {
-        ...state,
-        artist: action.artist,
         loading: false,
       };
 
@@ -104,13 +112,6 @@ function userReducer(
         user: action.user,
         loggedIn: true,
         loading: false,
-      };
-
-    case "CHECKING_USER_LOGIN":
-      return {
-        ...state,
-        user: [...state.user],
-        loading: true,
       };
 
     default:

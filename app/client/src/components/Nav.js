@@ -1,26 +1,10 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { connect } from "react-redux";
-import { handleLogout } from "../actions/index";
+import { handleLogout } from "../redux/actions/index";
 import { Link } from "react-router-dom";
 
-const Navigation = ({ loggedInStatus, handleLogout }) => {
-  function handleLogoutClick() {
-    const url = "http://localhost:3001/logout";
-    const options = {
-      method: "DELETE",
-      withCredentials: true,
-    };
-
-    fetch(url, options)
-      .then((response) => {
-        handleLogout();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
+const Navigation = (props) => {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>

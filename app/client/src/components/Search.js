@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchArtists } from "../actions/index";
+import { fetchArtists } from "../redux/actions/index";
 import { Button, Form } from "react-bootstrap";
 
 class Search extends Component {
