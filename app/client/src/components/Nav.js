@@ -44,7 +44,6 @@ const Navigation = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     loggedIn: state.user.loggedIn,
   };

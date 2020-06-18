@@ -12,7 +12,6 @@ class Home extends Component {
   }
 
   handleRegisterClick = () => {
-    console.log("click");
     this.props.history.push("/signup");
   };
 

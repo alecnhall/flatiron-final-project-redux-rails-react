@@ -1,8 +1,8 @@
 import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
-  artists: artistsReducer,
   user: userReducer,
+  artists: artistsReducer,
   artist: artistReducer,
   albums: albumsReducer,
 });
@@ -11,17 +11,17 @@ export default rootReducer;
 
 function albumsReducer(state = { albums: [], loading: false }, action) {
   switch (action.type) {
-    case "FETCHING_ALBUMS":
+    case "FETCHING_ARTIST_ALBUMS":
       return {
         ...state,
-        albums: [...state.albums],
+        albums: state.albums,
         loading: true,
       };
 
-    case "ADD_ALBUMS":
+    case "ADD_ARTIST_ALBUMS":
       return {
         ...state,
-        albums: action.albums,
+        albums: action.artistAlbums,
         loading: false,
       };
 
@@ -35,7 +35,7 @@ function artistReducer(state = { artist: {}, loading: false }, action) {
     case "FETCHING_ARTIST":
       return {
         ...state,
-        artist: { ...state.artist },
+        artist: state.artist,
         loading: true,
       };
 
@@ -52,7 +52,6 @@ function artistReducer(state = { artist: {}, loading: false }, action) {
 }
 
 function artistsReducer(state = { artists: [], loading: false }, action) {
-  console.log(action.type);
   switch (action.type) {
     case "SEARCHING_ARTISTS":
       return {

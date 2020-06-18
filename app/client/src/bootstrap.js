@@ -10,10 +10,10 @@ import thunk from "redux-thunk";
 
 import App from "./App";
 
-import reducers from "./redux/reducers/index";
+import rootReducer from "./redux/reducers/index";
 
 const store = createStore(
-  reducers,
+  rootReducer,
   compose(
     applyMiddleware(thunk),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
