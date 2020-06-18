@@ -11,14 +11,16 @@ class ArtistsController < ApplicationController
 
   def create
     artist = Artist.create!(
-      name: params["artist"]["name"],
-      img: params["artist"]["img"],
-      source_link: params["artist"]["source_link"]
+      name: params["name"],
+      img: params["img"],
+      source_link: params["source_link"],
+      user_id: params["user_id"]
     )
 
     if artist 
       render json: {
         status: :created,
+        artist: artist
       }
     else 
       render json: { status: 500}
