@@ -30,12 +30,12 @@ function albumsReducer(state = { albums: [], loading: false }, action) {
   }
 }
 
-function artistReducer(state = { artist: [], loading: false }, action) {
+function artistReducer(state = { artist: {}, loading: false }, action) {
   switch (action.type) {
     case "FETCHING_ARTIST":
       return {
         ...state,
-        artist: [...state.artist],
+        artist: { ...state.artist },
         loading: true,
       };
 
@@ -52,8 +52,9 @@ function artistReducer(state = { artist: [], loading: false }, action) {
 }
 
 function artistsReducer(state = { artists: [], loading: false }, action) {
+  console.log(action.type);
   switch (action.type) {
-    case "SEARCHING_FOR_ARTIST":
+    case "SEARCHING_ARTISTS":
       return {
         ...state,
         artists: [...state.artists],

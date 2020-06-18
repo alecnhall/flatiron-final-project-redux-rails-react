@@ -57,7 +57,7 @@ export const handleLogout = () => {
 
 export const fetchArtists = (name) => {
   return (dispatch) => {
-    dispatch({ type: "SEARCHING_ARTIST" });
+    dispatch({ type: "SEARCHING_ARTISTS" });
     fetch(
       `https://cors-anywhere.herokuapp.com/https://api.deezer.com/search/artist?q=${name}`
     )

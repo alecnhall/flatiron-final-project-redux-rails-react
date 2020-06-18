@@ -15,13 +15,13 @@ const Navigation = (props) => {
               Home
             </Nav.Link>
 
-            {loggedInStatus === "LOGGED_IN" && (
+            {props.loggedIn && (
               <Nav.Link as={Link} to="/profile">
                 Profile
               </Nav.Link>
             )}
           </Nav>
-          {loggedInStatus === "LOGGED_IN" ? (
+          {props.loggedIn ? (
             <Nav>
               <Nav.Link as={Link} to="/" onClick={handleLogoutClick}>
                 Logout
@@ -43,8 +43,15 @@ const Navigation = (props) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    loggedIn: state.user.loggedIn,
+  };
+};
+
 function mapDispatchToProps(dispatch) {
   return { handleLogout: () => dispatch(handleLogout) };
 }
 
-export default connect(null, mapDispatchToProps)(Navigation);
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);

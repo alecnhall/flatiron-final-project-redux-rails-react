@@ -27,6 +27,7 @@ class Search extends Component {
   };
 
   render() {
+    console.log(this.props.fetchArtists);
     return (
       <div>
         <Form onSubmit={this.handleSubmit}>
