@@ -47,3 +47,11 @@
   margin-left: 20px;
   padding-bottom: 10px;
 }
+
+.logged-in-options {
+  display: flex;
+}
+
+.search-and-results {
+  margin-top: 10px;
+}

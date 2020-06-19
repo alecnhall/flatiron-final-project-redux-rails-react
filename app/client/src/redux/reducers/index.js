@@ -5,9 +5,34 @@ const rootReducer = combineReducers({
   artists: artistsReducer,
   artist: artistReducer,
   albums: albumsReducer,
+  userArtists: userArtistsReducer,
 });
 
 export default rootReducer;
+
+function userArtistsReducer(
+  state = { userArtists: [], loading: false },
+  action
+) {
+  switch (action.type) {
+    case "ADDING_ARTIST_TO_FAVORITES":
+      return {
+        ...state,
+        userArtists: state.artists,
+        loading: true,
+      };
+
+    case "ARTIST_ADDED":
+      return {
+        ...state,
+        userArtists: action.userArtists,
+        loading: false,
+      };
+
+    default:
+      return state;
+  }
+}
 
 function albumsReducer(state = { albums: [], loading: false }, action) {
   switch (action.type) {

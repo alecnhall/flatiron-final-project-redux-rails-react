@@ -13,7 +13,6 @@ class ArtistsController < ApplicationController
     artist = Artist.create!(
       name: params["name"],
       img: params["img"],
-      source_link: params["source_link"],
       user_id: params["user_id"]
     )
 

@@ -93,3 +93,15 @@ export const fetchArtistAlbums = (id) => {
       });
   };
 };
+
+export const addArtistToFavorites = (options) => {
+  return (dispatch) => {
+    dispatch({ type: "ADDING_ARTIST_TO_FAVORITES" });
+    fetch("http://localhost:3001/artists", options)
+      .then((res) => res.json())
+      .then((res) => {
+        const artist = res.artist;
+        return dispatch({ type: "ARTIST_ADDED", artist });
+      });
+  };
+};

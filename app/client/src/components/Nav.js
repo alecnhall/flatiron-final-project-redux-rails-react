@@ -16,9 +16,14 @@ const Navigation = (props) => {
             </Nav.Link>
 
             {props.loggedIn && (
-              <Nav.Link as={Link} to="/profile">
-                Profile
-              </Nav.Link>
+              <div className="logged-in-options">
+                <Nav.Link as={Link} to="/profile">
+                  Profile
+                </Nav.Link>
+                <Nav.Link as={Link} to="/search">
+                  Search Artists
+                </Nav.Link>
+              </div>
             )}
           </Nav>
           {props.loggedIn ? (

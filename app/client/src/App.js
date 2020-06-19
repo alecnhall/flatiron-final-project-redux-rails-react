@@ -3,8 +3,9 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
-import Profile from "./components/Profile";
+import Profile from "./pages/Profile";
 import ArtistById from "./components/ArtistById";
+import SearchPage from "./pages/Search";
 import "./App.css";
 import { connect } from "react-redux";
 import { checkLogin } from "./redux/actions";
@@ -45,6 +46,11 @@ class App extends Component {
             exact
             path={"/artist/:artistId"}
             render={(props) => <ArtistById {...props} />}
+          />
+          <Route
+            exact
+            path={"/search"}
+            render={(props) => <SearchPage {...props} />}
           />
         </Switch>
       </BrowserRouter>
