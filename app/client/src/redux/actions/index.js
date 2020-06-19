@@ -100,8 +100,28 @@ export const addArtistToFavorites = (options) => {
     fetch("http://localhost:3001/artists", options)
       .then((res) => res.json())
       .then((res) => {
-        const artist = res.artist;
-        return dispatch({ type: "ARTIST_ADDED", artist });
+        console.log(res);
+        const userArtist = res.artist;
+        return dispatch({ type: "ARTIST_ADDED", userArtist });
       });
+  };
+};
+
+export const fetchFavoriteArtists = (id) => {
+  return (dispatch) => {
+    dispatch({ type: "FETCHING_FAVORITE_ARTISTS" });
+    fetch(`http://localhost:3001/artists?user_id=${id}`)
+      .then((res) => res.json())
+      .then((res) => {
+        const userArtists = res;
+        return dispatch({ type: "ADD_FAVORITE_ARTISTS", userArtists });
+      });
+  };
+};
+
+export const fetchAllFavoriteArtists = () => {
+  return (dispatch) => {
+    dispatch({ type: "FETCHING_ALL_FAVORITED_ARTISTS" });
+    fetch("http://localhost:3001/artists");
   };
 };

@@ -18,7 +18,7 @@ function userArtistsReducer(
     case "ADDING_ARTIST_TO_FAVORITES":
       return {
         ...state,
-        userArtists: state.artists,
+        userArtists: [...state.userArtists],
         loading: true,
       };
 
@@ -29,6 +29,19 @@ function userArtistsReducer(
         loading: false,
       };
 
+    case "FETCHING_FAVORITE_ARTISTS":
+      return {
+        ...state,
+        userArtists: [...state.userArtists],
+        loading: true,
+      };
+
+    case "ADD_FAVORITE_ARTISTS":
+      return {
+        ...state,
+        userArtists: action.userArtists,
+        loading: false,
+      };
     default:
       return state;
   }
