@@ -6,29 +6,25 @@ const rootReducer = combineReducers({
   artist: artistReducer,
   albums: albumsReducer,
   userArtists: userArtistsReducer,
+  favoritedArtists: favoritedArtistsReducer,
 });
 
 export default rootReducer;
+function favoritedArtistsReducer(
+  state = { favoritedArtists: [], loading: false },
+  action
+) {
+  switch (action.type) {
+    default:
+      return state;
+  }
+}
 
 function userArtistsReducer(
   state = { userArtists: [], loading: false },
   action
 ) {
   switch (action.type) {
-    case "ADDING_ARTIST_TO_FAVORITES":
-      return {
-        ...state,
-        userArtists: [...state.userArtists],
-        loading: true,
-      };
-
-    case "ARTIST_ADDED":
-      return {
-        ...state,
-        userArtists: action.userArtists,
-        loading: false,
-      };
-
     case "FETCHING_FAVORITE_ARTISTS":
       return {
         ...state,
@@ -42,6 +38,7 @@ function userArtistsReducer(
         userArtists: action.userArtists,
         loading: false,
       };
+
     default:
       return state;
   }
@@ -80,7 +77,8 @@ function artistReducer(state = { artist: {}, loading: false }, action) {
     case "ADD_ARTIST":
       return {
         ...state,
-        artist: action.artist,
+        artist: action.payload.artist,
+        isFavorited: action.payload.isFavorited,
         loading: false,
       };
 
@@ -103,6 +101,12 @@ function artistsReducer(state = { artists: [], loading: false }, action) {
         ...state,
         artists: action.artists,
         loading: false,
+      };
+
+    case "CLEAR_SEARCH":
+      return {
+        ...state,
+        artists: [],
       };
 
     default:

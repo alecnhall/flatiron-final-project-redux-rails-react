@@ -12,11 +12,13 @@ class Profile extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <Nav />
         <Container>
           <h1>Hello, {this.props.user.username}!</h1>
+          <h3>Your favorited artists!</h3>
           <ProfileArtistCards artists={this.props.userArtists} />
         </Container>
       </div>

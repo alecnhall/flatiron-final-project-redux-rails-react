@@ -67,7 +67,7 @@ export const fetchArtists = (name) => {
 };
 
 export const fetchArtist = (id) => {
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({ type: "FETCHING_ARTIST" });
     fetch(
       `https://cors-anywhere.herokuapp.com/https://api.deezer.com/artist/${id}`
@@ -75,7 +75,19 @@ export const fetchArtist = (id) => {
       .then((res) => res.json())
       .then((res) => {
         const artist = res;
-        return dispatch({ type: "ADD_ARTIST", artist });
+        const userArtists = getState().userArtists;
+        const filtered = userArtists.userArtists.filter(
+          (a) => a.name === artist.name
+        );
+        let isFavorited = filtered.length > 0 ? true : false;
+        console.log(isFavorited);
+        return dispatch({
+          type: "ADD_ARTIST",
+          payload: {
+            artist,
+            isFavorited,
+          },
+        });
       });
   };
 };
@@ -100,9 +112,14 @@ export const addArtistToFavorites = (options) => {
     fetch("http://localhost:3001/artists", options)
       .then((res) => res.json())
       .then((res) => {
-        console.log(res);
         const userArtist = res.artist;
-        return dispatch({ type: "ARTIST_ADDED", userArtist });
+        const userID = res.artist.user_id;
+        dispatch({ type: "ARTIST_ADDED", userArtist });
+        return userID;
+      })
+      .then((userID) => {
+        console.log(userID);
+        dispatch(fetchFavoriteArtists(userID));
       });
   };
 };
@@ -122,6 +139,17 @@ export const fetchFavoriteArtists = (id) => {
 export const fetchAllFavoriteArtists = () => {
   return (dispatch) => {
     dispatch({ type: "FETCHING_ALL_FAVORITED_ARTISTS" });
-    fetch("http://localhost:3001/artists");
+    fetch("http://localhost:3001/artists")
+      .then((res) => res.json())
+      .then((res) => {
+        const favoritedArtists = res;
+        return dispatch({ type: "ADD_FAVORITE_ARTISTS" }, favoritedArtists);
+      });
+  };
+};
+
+export const clearSearch = () => {
+  return (dispatch) => {
+    return dispatch({ type: "CLEAR_SEARCH" });
   };
 };
